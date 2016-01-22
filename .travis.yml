@@ -9,8 +9,10 @@ python:
   # maintainers to fix their pypy-dev package.
   - "pypy"
 # command to run tests
-script: nosetests
+script:
+  - nosetests
+  - coverage run --source=easy_class setup.py test
 before_install:
-  - pip install codecov
+  - pip install coveralls
 after_success:
-  - codecov
+  coveralls
