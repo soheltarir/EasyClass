@@ -56,7 +56,7 @@ def runtests():
         obj = TestClass(b="Testing")
     try:
         obj.b = None
-    except AttributeError:
+    except ValueError:
         pass
     try:
         obj.a = 11

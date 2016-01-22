@@ -106,10 +106,10 @@ class StringVariable(Variable):
         super(StringVariable, self).__init__(value_type=str, **kwargs)
 
     def setter_checks(self, value):
-        if len(value) > self.max_length:
+        if value and len(value) > self.max_length:
             raise ValueError("Length of \"{0}\" for attribute {1} exceeds max_length specified of {2}".
                              format(value, self.name, self.max_length))
-        if len(value) < self.min_length:
+        if value and len(value) < self.min_length:
             raise ValueError("Length of \"{0}\" for attribute {1} is less than min_length specified of {2}".
                              format(value, self.name, self.min_length))
 
