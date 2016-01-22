@@ -12,6 +12,7 @@ script:
   - nosetests
   - coverage run --source=easy_class runtests.py
 before_install:
+  - pip install -r requirements.txt
   - pip install coveralls
 after_success:
   coveralls
