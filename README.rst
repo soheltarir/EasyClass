@@ -1,6 +1,6 @@
-=======================================
-EASY Class |package| |coverage| |build|
-=======================================
+============================
+EASY Class |package| |build|
+============================
 
 EASY Class is a toolkit for creating generic classes in an elegant way.
 
@@ -144,3 +144,8 @@ format ``YYYY-MM-DD``.
 ----------------
 A python **time** variable. **TimeVariable** either accepts a **time** variable or string of the
 format ``HH:MM:SS``.
+
+
+.. |package| image:: https://badge.fury.io/py/easy-class.svg
+                     :target: https://pypi.python.org/pypi/easy-class
+.. |build| image:: https://travis-ci.org/soheltarir/EasyClass.svg?branch=master
