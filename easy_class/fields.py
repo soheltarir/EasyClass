@@ -12,7 +12,7 @@ class Variable(object):
         self.null = null
         self.type = value_type
         self.editable = editable
-        if not isinstance(default, value_type):
+        if default is not None and not isinstance(default, value_type):
             raise AttributeError("Type mismatch for default value of {0}, expected {1}".
                                  format(self.__class__.__name__, self.type.__name__))
         if choices:
@@ -82,9 +82,21 @@ class PositiveIntegerVariable(IntegerVariable):
         super(PositiveIntegerVariable, self).setter_checks(value)
 
 
-class FloatVariable(IntegerVariable):
+class FloatVariable(Variable):
     def __init__(self, **kwargs):
+        self.max_value = kwargs.pop('max_value', None)
+        self.min_value = kwargs.pop('min_value', None)
         super(FloatVariable, self).__init__(value_type=float, **kwargs)
+
+    def setter_checks(self, value):
+        if self.max_value and value > self.max_value:
+            raise ValueError("{0} exceeds max_value of {1} specified".format(self.name, self.max_value))
+        if self.min_value and value < self.min_value:
+            raise ValueError("{0} less than min_value of {1} specified".format(self.name, self.min_value))
+
+    def __set__(self, instance, value):
+        self.setter_checks(value)
+        super(FloatVariable, self).__set__(instance, value)
 
 
 class StringVariable(Variable):
@@ -143,7 +155,7 @@ class DateVariable(ClassVariable):
     @staticmethod
     def clean_value(value):
         if isinstance(value, str):
-            return date.strptime(value, DATE_FORMAT)
+            return datetime.strptime(value, DATE_FORMAT).date()
         else:
             return value
 
@@ -158,7 +170,7 @@ class TimeVariable(ClassVariable):
     @staticmethod
     def clean_value(value):
         if isinstance(value, str):
-            return time.strptime(value, TIME_FORMAT)
+            return datetime.strptime(value, TIME_FORMAT).time()
         else:
             return value
 

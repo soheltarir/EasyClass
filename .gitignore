@@ -4,3 +4,4 @@
 build
 dist
 easy_class.egg-info
+.coverage

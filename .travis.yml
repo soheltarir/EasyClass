@@ -10,7 +10,7 @@ python:
 # command to run tests
 script:
   - nosetests
-  - coverage run --source=easy_class setup.py test
+  - coverage run --source=easy_class runtests.py
 before_install:
   - pip install coveralls
 after_success:
