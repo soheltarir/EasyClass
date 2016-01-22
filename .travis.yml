@@ -10,3 +10,7 @@ python:
   - "pypy"
 # command to run tests
 script: nosetests
+before_install:
+  - pip install codecov
+after_success:
+  - codecov
