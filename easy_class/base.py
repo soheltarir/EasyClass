@@ -1,10 +1,10 @@
+from future.utils import with_metaclass
+
 from .fields import Variable
 from .meta import EasyClassMeta
 
 
-class EasyClass(object):
-    __metaclass__ = EasyClassMeta
-
+class EasyClass(with_metaclass(EasyClassMeta, object)):
     def __repr__(self):
         return "<{0}: {1}>".format(self.__class__.__name__, vars(self).get('__str__', None))
 
