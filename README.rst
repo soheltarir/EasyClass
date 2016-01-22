@@ -1,6 +1,6 @@
-============================
-EASY Class |package| |build|
-============================
+=======================================
+EASY Class |package| |build| |coverage|
+=======================================
 
 EASY Class is a toolkit for creating generic classes in an elegant way.
 
@@ -149,3 +149,5 @@ format ``HH:MM:SS``.
 .. |package| image:: https://badge.fury.io/py/easy-class.svg
                      :target: https://pypi.python.org/pypi/easy-class
 .. |build| image:: https://travis-ci.org/soheltarir/EasyClass.svg?branch=master
+.. |coverage| image:: https://coveralls.io/repos/github/soheltarir/EasyClass/badge.svg?
+                      :target:  https://coveralls.io/github/soheltarir/EasyClass?

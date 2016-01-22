@@ -16,7 +16,7 @@ class Variable(object):
             raise AttributeError("Type mismatch for default value of {0}, expected {1}".
                                  format(self.__class__.__name__, self.type.__name__))
         if choices:
-            assert isinstance(self.choices, list), \
+            assert isinstance(choices, list), \
                 "choices expects list type, but received {0}".format(type(choices).__name__)
         self.choices = choices
 
@@ -30,7 +30,7 @@ class Variable(object):
                             format(self.name, self.type.__name__, type(value).__name__)
                             )
         if self.choices and value not in self.choices:
-            raise ValueError("Value should be among [{0}]".format(", ".join(self.choices)))
+            raise ValueError("Value should be among '{0}'".format(self.choices))
 
     def __get__(self, instance, owner):
         value = vars(instance).get(self.name, self.default)
