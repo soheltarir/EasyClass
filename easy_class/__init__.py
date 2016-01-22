@@ -3,7 +3,7 @@ from .fields import IntegerVariable, StringVariable, BooleanVariable, PositiveIn
     ClassVariable, DictVariable, DateTimeVariable, DateVariable, TimeVariable
 
 __title__ = 'Easy Class'
-__version__ = '1.0.0.dev2'
+__version__ = '1.0.0'
 __author__ = 'Sohel Tarir'
 
 # Version synonym
