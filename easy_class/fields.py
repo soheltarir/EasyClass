@@ -40,6 +40,9 @@ class Variable(object):
 
     def __set__(self, instance, value):
         self.base_setter_checks(value)
+        if hasattr(self, "setter_checks"):
+            method = getattr(self, "setter_checks")
+            method(value)
         vars(instance)[self.name] = value
 
     def __delete__(self, instance):
@@ -112,10 +115,6 @@ class StringVariable(Variable):
         if value and len(value) < self.min_length:
             raise ValueError("Length of \"{0}\" for attribute {1} is less than min_length specified of {2}".
                              format(value, self.name, self.min_length))
-
-    def __set__(self, instance, value):
-        self.setter_checks(value)
-        super(StringVariable, self).__set__(instance, value)
 
 
 class BooleanVariable(Variable):

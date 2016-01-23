@@ -1,7 +1,33 @@
 from future.utils import with_metaclass
 
 from .fields import Variable
-from .meta import EasyClassMeta
+
+
+class EasyClassMeta(type):
+    def __new__(cls, name, bases, attrs):
+        attributes = {}
+
+        if "_attribute" in attrs:
+            raise NameError("_attribute is a reserved attribute name, please use a different name.")
+
+        # Get all the attributes from parent classes.
+        parents = [b for b in bases if isinstance(b, EasyClassMeta)]
+        for kls in parents:
+            for attr_name in kls._attributes:
+                attributes[attr_name] = kls._attributes[attr_name]
+
+        # Get all the attributes from current class.
+        for attr_name, val in attrs.items():
+            if issubclass(val.__class__, Variable):
+                attributes[attr_name] = val
+        for attribute, val in attributes.items():
+            if attribute not in attrs:
+                # This means this a parent class attribute
+                attrs[attribute] = val
+            attrs[attribute].name = attribute
+        attrs['_attributes'] = attributes
+
+        return super(EasyClassMeta, cls).__new__(cls, name, bases, attrs)
 
 
 class EasyClass(with_metaclass(EasyClassMeta, object)):
