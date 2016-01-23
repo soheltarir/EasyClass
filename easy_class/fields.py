@@ -18,6 +18,9 @@ class Variable(object):
         if choices:
             assert isinstance(choices, list), \
                 "choices expects list type, but received {0}".format(type(choices).__name__)
+            for choice in choices:
+                if not isinstance(choice, self.type):
+                    raise AttributeError("Invalid type for choices provided.")
         self.choices = choices
 
     def base_setter_checks(self, value):
