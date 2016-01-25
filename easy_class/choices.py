@@ -26,6 +26,7 @@ class EasyChoiceMeta(type):
     def __new__(cls, name, bases, attrs):
         choices = {}
         labels = Labels()
+        values = []
 
         # Get all the attributes from parent classes.
         parents = [b for b in bases if isinstance(b, EasyChoiceMeta)]
@@ -39,6 +40,7 @@ class EasyChoiceMeta(type):
                 choices[choice_name] = val
 
         for choice_name, val in choices.items():
+            values.append(val[0])
             try:
                 label = val[1]
             except IndexError:
@@ -47,7 +49,8 @@ class EasyChoiceMeta(type):
             attrs[choice_name] = Choice(value=val[0], label=label)
 
         attrs["_choices"] = choices
-        attrs["choices"] = choices.keys()
+        attrs["values"] = choices.values()
+        attrs["choices"] = values
         attrs["labels"] = labels
 
         return super(EasyChoiceMeta, cls).__new__(cls, name, bases, attrs)
@@ -56,4 +59,3 @@ class EasyChoiceMeta(type):
 class EasyChoices(with_metaclass(EasyChoiceMeta, object)):
     choices = []
     labels = Labels()
-
