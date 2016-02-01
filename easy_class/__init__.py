@@ -4,9 +4,9 @@ from .fields import IntegerVariable, StringVariable, BooleanVariable, PositiveIn
 from .choices import EasyChoices
 
 __title__ = 'Easy Class'
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 __author__ = 'Sohel Tarir'
-__modified__ = '2016-01-25'
+__modified__ = '2016-02-02'
 
 # Version synonym
 VERSION = __version__

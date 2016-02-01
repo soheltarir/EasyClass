@@ -28,7 +28,7 @@ class Variable(object):
             raise AssertionError("Attribute {0} is not editable".format(self.name))
         if self.null is False and value is None:
             raise ValueError("{0} cannot be null".format(self.name))
-        if not isinstance(value, self.type):
+        if value is not None and not isinstance(value, self.type):
             raise TypeError("{0} expects {1} type, but received {2}.".
                             format(self.name, self.type.__name__, type(value).__name__)
                             )
